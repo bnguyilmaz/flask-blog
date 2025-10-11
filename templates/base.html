@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Bengü's Blog{% endblock %}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+
+  {# 🌓 İstediğin temayı burada seç #}
+  <!-- <link rel="stylesheet" href="{{ url_for('static', filename='style-light.css') }}"> -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style-dark.css') }}">
+</head>
+<body>
+
+  <nav class="navbar">
+    <h1><a href="{{ url_for('index') }}">Bengü’s Blog</a></h1>
+    <div class="nav-links">
+      <a href="{{ url_for('writings') }}">Writings</a>
+      <a href="{{ url_for('songs') }}">Music</a>
+      <a href="{{ url_for('movies') }}">Movies</a>
+      <a href="{{ url_for('books') }}">Books</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>
+    <p>© 2025 Bengü Yılmaz</p>
+  </footer>
+
+</body>
+</html>
