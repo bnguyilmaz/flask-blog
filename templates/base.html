@@ -1,35 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <title>{% block title %}Bengü's Blog{% endblock %}</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
 
-  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.tailwindcss.com"></script>
-
-  {# 🌓 İstediğin temayı burada seç #}
-  <!-- <link rel="stylesheet" href="{{ url_for('static', filename='style-light.css') }}"> -->
-  <!-- link rel="stylesheet" href="{{ url_for('static', filename='style-dark.css') }}"> -->
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 
-  <nav class="navbar">
-    <h1><a href="{{ url_for('index') }}">Bengü’s Blog</a></h1>
-    <div class="nav-links">
-      <a href="{{ url_for('writings') }}">Writings</a>
-      <a href="{{ url_for('songs') }}">Music</a>
-      <a href="{{ url_for('movies') }}">Movies</a>
-      <a href="{{ url_for('books') }}">Books</a>
+  <nav class="navbar bg-base-200 px-6">
+    <div class="flex-1">
+      <a href="{{ url_for('index') }}" class="btn btn-ghost normal-case text-xl">Bengü’s Blog</a>
+    </div>
+    <div class="flex-none">
+      <ul class="menu menu-horizontal px-1">
+        <li><a href="{{ url_for('writings') }}">Writings</a></li>
+        <li><a href="{{ url_for('songs') }}">Music</a></li>
+        <li><a href="{{ url_for('movies') }}">Movies</a></li>
+        <li><a href="{{ url_for('books') }}">Books</a></li>
+      </ul>
     </div>
   </nav>
 
-  <main class="container">
+  <main class="container mx-auto mt-10">
     {% block content %}{% endblock %}
   </main>
 
-  <footer>
-    <p>© 2025 Bengü Yılmaz</p>
+  <footer class="footer footer-center p-4 bg-base-200 text-base-content mt-10">
+    <aside>
+      <p>© 2025 Bengü Yılmaz</p>
+    </aside>
   </footer>
 
 </body>
