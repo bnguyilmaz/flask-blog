@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Add New Writing{% endblock %}
+
+{% block content %}
+  <h2>Add New Writing</h2>
+
+  <form method="POST" class="add-form">
+    <label for="title">Title:</label><br>
+    <input type="text" id="title" name="title" required><br><br>
+
+    <label for="content">Content:</label><br>
+    <textarea id="content" name="content" rows="6" cols="50" required></textarea><br><br>
+
+    <button type="submit">Add Writing</button>
+  </form>
+{% endblock %}
