@@ -3,21 +3,35 @@
 {% block title %}Writings - Bengü's Blog{% endblock %}
 
 {% block content %}
-  <h2>My Writings</h2>
+<div class="max-w-4xl mx-auto px-4">
 
-  <a href="{{ url_for('add_writing', pass='bengu123') }}" class="add-link">
-    + Add New Writing
-  </a>
-
-  <div class="writings-list">
-    {% for writing in writings %}
-      <div class="writing-item">
-        <h3>{{ writing[1] }}</h3>
-        <p>{{ writing[2] }}</p>
-        <small>{{ writing[3] }}</small>
-      </div>
-    {% else %}
-      <p>No writings yet.</p>
-    {% endfor %}
+  <div class="flex justify-between items-center mb-6">
+    <h2 class="text-3xl font-bold">📝 My Writings</h2>
+    <a href="{{ url_for('add_writing', pass='bengu123') }}" class="btn btn-primary">
+      + Add New Writing
+    </a>
   </div>
+
+  {% if writings %}
+    <div class="grid gap-6">
+      {% for writing in writings %}
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h3 class="card-title text-2xl font-semibold">{{ writing[1] }}</h3>
+            <p class="text-base leading-relaxed">{{ writing[2] }}</p>
+            <div class="card-actions justify-end">
+              <span class="text-sm opacity-70">{{ writing[3] }}</span>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="alert alert-info shadow-lg mt-10">
+      <div>
+        <span>No writings yet. Start by adding one!</span>
+      </div>
+    </div>
+  {% endif %}
+</div>
 {% endblock %}

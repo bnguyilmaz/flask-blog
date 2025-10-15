@@ -1,16 +1,29 @@
 {% extends "base.html" %}
-{% block title %}Add New Writing{% endblock %}
+
+{% block title %}Add Writing - Bengü's Blog{% endblock %}
 
 {% block content %}
-  <h2>Add New Writing</h2>
+<div class="max-w-2xl mx-auto mt-10 p-6 bg-base-200 rounded-xl shadow-lg">
+  <h2 class="text-2xl font-bold mb-4 text-center">✍️ Add a New Writing</h2>
 
-  <form method="POST" class="add-form">
-    <label for="title">Title:</label><br>
-    <input type="text" id="title" name="title" required><br><br>
+  <form method="POST" class="space-y-4">
+    <div class="form-control">
+      <label class="label">
+        <span class="label-text">Title</span>
+      </label>
+      <input type="text" name="title" placeholder="Enter title" class="input input-bordered w-full" required>
+    </div>
 
-    <label for="content">Content:</label><br>
-    <textarea id="content" name="content" rows="6" cols="50" required></textarea><br><br>
+    <div class="form-control">
+      <label class="label">
+        <span class="label-text">Content</span>
+      </label>
+      <textarea name="content" placeholder="Write your thoughts..." class="textarea textarea-bordered h-40 w-full" required></textarea>
+    </div>
 
-    <button type="submit">Add Writing</button>
+    <div class="form-control mt-6">
+      <button type="submit" class="btn btn-primary w-full">Save Writing</button>
+    </div>
   </form>
+</div>
 {% endblock %}
