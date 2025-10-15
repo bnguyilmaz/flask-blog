@@ -2,7 +2,6 @@ from flask import *
 import sqlite3
 from datetime import datetime
 
-
 app = Flask(__name__)
 
 def init_db():
@@ -51,31 +50,48 @@ def init_db():
     conn.commit()
     conn.close()
 
+init_db()  # 📍 tabloyu oluşturur
 
-init_db()  # 📍 bu satır tabloyu oluşturur
+# --------------------------
+#   ROUTES
+# --------------------------
 
 @app.route('/')
 def index():
     return "Database hazır!"
 
+# ✍️ Writings sayfası
 @app.route('/writings')
 def writings():
-    return render_template('writings.html')
+    conn = sqlite3.connect('blog.db')
+    cursor = conn.cursor()
 
+    # Veritabanındaki tüm yazıları son eklenene göre getir
+    cursor.execute("SELECT * FROM writings ORDER BY id DESC")
+    writings = cursor.fetchall()
+
+    conn.close()
+
+    # writing[1] = title, writing[2] = content, writing[3] = date
+    return render_template('writings.html', writings=writings)
+
+# 🎵 Songs
 @app.route('/songs')
 def songs():
     return "Songs page coming soon!"
 
+# 🎬 Movies
 @app.route('/movies')
 def movies():
     return "Movies page coming soon!"
 
+# 📚 Books
 @app.route('/books')
 def books():
     return "Books page coming soon!"
 
 
-
+# ➕ Add Writing (Form)
 @app.route('/add-writing', methods=['GET', 'POST'])
 def add_writing():
     password = request.args.get('pass')
@@ -99,10 +115,5 @@ def add_writing():
     return render_template('add_writing.html')
 
 
-
-
-
 if __name__ == "__main__":
     app.run(debug=True)
-
-
