@@ -3,7 +3,15 @@ import sqlite3
 from datetime import datetime
 
 app = Flask(__name__)
+app.secret_key = "super_secret_key_123"  # session için gerekli anahtar
 
+# Sabit kullanıcı bilgileri (tek kullanıcı için)
+USERNAME = "bengu"
+PASSWORD = "1234"
+
+# -------------------------------
+# DATABASE SETUP
+# -------------------------------
 def init_db():
     conn = sqlite3.connect('blog.db')
     cursor = conn.cursor()
@@ -50,53 +58,61 @@ def init_db():
     conn.commit()
     conn.close()
 
-init_db()  # 📍 tabloyu oluşturur
+init_db()
 
-# --------------------------
-#   ROUTES
-# --------------------------
+# -------------------------------
+# ROUTES
+# -------------------------------
 
 @app.route('/')
 def index():
-    return "Database hazır!"
+    return render_template('index.html')
 
-# ✍️ Writings sayfası
 @app.route('/writings')
 def writings():
     conn = sqlite3.connect('blog.db')
     cursor = conn.cursor()
-
-    # Veritabanındaki tüm yazıları son eklenene göre getir
     cursor.execute("SELECT * FROM writings ORDER BY id DESC")
     writings = cursor.fetchall()
-
     conn.close()
-
-    # writing[1] = title, writing[2] = content, writing[3] = date
     return render_template('writings.html', writings=writings)
 
-# 🎵 Songs
-@app.route('/songs')
-def songs():
-    return "Songs page coming soon!"
 
-# 🎬 Movies
-@app.route('/movies')
-def movies():
-    return "Movies page coming soon!"
+# -------------------------------
+# LOGIN & LOGOUT
+# -------------------------------
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
 
-# 📚 Books
-@app.route('/books')
-def books():
-    return "Books page coming soon!"
+        if username == USERNAME and password == PASSWORD:
+            session["logged_in"] = True
+            flash("Welcome back, Bengü!", "success")
+            return redirect(url_for("writings"))
+        else:
+            flash("Wrong username or password.", "error")
+            return redirect(url_for("login"))
+
+    return render_template("login.html")
+
+@app.route("/logout")
+def logout():
+    session.clear()
+    flash("You have been logged out.", "info")
+    return redirect(url_for("login"))
 
 
-# ➕ Add Writing (Form)
+# -------------------------------
+# ADD WRITING (Korumalı Alan)
+# -------------------------------
 @app.route('/add-writing', methods=['GET', 'POST'])
 def add_writing():
-    password = request.args.get('pass')
-    if password != "bengu123":
-        return "Unauthorized access", 403
+    # 🔒 Giriş yapılmadıysa login sayfasına yönlendir
+    if not session.get("logged_in"):
+        flash("You must log in to add a new writing.", "warning")
+        return redirect(url_for("login"))
 
     if request.method == 'POST':
         title = request.form['title']
@@ -110,9 +126,26 @@ def add_writing():
         conn.commit()
         conn.close()
 
+        flash("Writing added successfully!", "success")
         return redirect(url_for('writings'))
 
     return render_template('add_writing.html')
+
+
+# -------------------------------
+# PLACEHOLDER PAGES
+# -------------------------------
+@app.route('/songs')
+def songs():
+    return "Songs page coming soon!"
+
+@app.route('/movies')
+def movies():
+    return "Movies page coming soon!"
+
+@app.route('/books')
+def books():
+    return "Books page coming soon!"
 
 
 if __name__ == "__main__":
