@@ -3,27 +3,39 @@
 {% block title %}Add Writing - Bengü's Blog{% endblock %}
 
 {% block content %}
-<div class="max-w-2xl mx-auto mt-10 p-6 bg-base-200 rounded-xl shadow-lg">
-  <h2 class="text-2xl font-bold mb-4 text-center">✍️ Add a New Writing</h2>
+<div class="max-w-2xl mx-auto mt-10 p-8 bg-[#2a2724] border border-[#3e3a36] rounded-xl shadow-md">
+  <h2 class="text-3xl font-serif font-semibold mb-6 text-[#d9cbb5] text-center">
+    ✍️ Add a New Writing
+  </h2>
 
-  <form method="POST" class="space-y-4">
-    <div class="form-control">
-      <label class="label">
-        <span class="label-text">Title</span>
-      </label>
-      <input type="text" name="title" placeholder="Enter title" class="input input-bordered w-full" required>
+  <form method="POST" class="space-y-6">
+    <div>
+      <label class="block mb-2 text-[#d9cbb5] font-medium">Title</label>
+      <input
+        type="text"
+        name="title"
+        placeholder="Enter title"
+        class="input input-bordered w-full bg-[#1d1b18] border-[#4a443d] text-[#e9e4d8] focus:border-[#a88a67] focus:outline-none"
+        required
+      >
     </div>
 
-    <div class="form-control">
-      <label class="label">
-        <span class="label-text">Content</span>
-      </label>
-      <textarea name="content" placeholder="Write your thoughts..." class="textarea textarea-bordered h-40 w-full" required></textarea>
+    <div>
+      <label class="block mb-2 text-[#d9cbb5] font-medium">Content</label>
+      <textarea
+        name="content"
+        placeholder="Write your thoughts..."
+        class="textarea textarea-bordered w-full h-48 bg-[#1d1b18] border-[#4a443d] text-[#e9e4d8] focus:border-[#a88a67] focus:outline-none"
+        required
+      ></textarea>
     </div>
 
-    <div class="form-control mt-6">
-      <button type="submit" class="btn btn-primary w-full">Save Writing</button>
-    </div>
+    <button
+      type="submit"
+      class="btn w-full bg-[#a88a67] border-none text-white hover:bg-[#8b7153] transition-all"
+    >
+      Save Writing
+    </button>
   </form>
 </div>
 {% endblock %}

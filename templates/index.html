@@ -3,12 +3,18 @@
 {% block title %}Home - Bengü's Blog{% endblock %}
 
 {% block content %}
-<div class="text-center mt-20">
-  <h1 class="text-4xl font-bold mb-4">🌿 Welcome to Bengü’s Blog</h1>
-  <p class="text-lg opacity-80 mb-8">
-    Discover my thoughts, songs, and stories — all in one place.
+<div class="flex flex-col items-center justify-center text-center mt-32 px-6">
+  <h1 class="text-5xl font-serif font-semibold text-[#d9cbb5] mb-6">
+    🌿 Welcome to Bengü’s Blog
+  </h1>
+
+  <p class="text-lg text-[#cfc7b8] max-w-2xl leading-relaxed mb-10">
+    A quiet corner for words, songs, and reflections — written with warmth, rhythm, and a touch of melancholy.
   </p>
-  <a href="{{ url_for('writings') }}" class="btn btn-primary">Start Reading</a>
+
+  <a href="{{ url_for('writings') }}"
+     class="btn bg-[#a88a67] border-none text-white hover:bg-[#8b7153] px-8 py-3 transition-all">
+    Start Reading
+  </a>
 </div>
 {% endblock %}
-

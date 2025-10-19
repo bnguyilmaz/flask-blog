@@ -3,24 +3,40 @@
 {% block title %}Login - Bengü's Blog{% endblock %}
 
 {% block content %}
-<div class="max-w-sm mx-auto mt-20 p-6 bg-base-200 rounded-xl shadow-md">
-  <h2 class="text-2xl font-bold mb-4 text-center">🔒 Login</h2>
-  <form method="POST" class="space-y-4">
-    <div class="form-control">
-      <label class="label">
-        <span class="label-text">Username</span>
-      </label>
-      <input type="text" name="username" class="input input-bordered w-full" required>
+<div class="min-h-[70vh] flex items-center justify-center">
+  <div class="w-full max-w-sm p-8 bg-[#2a2724] border border-[#3e3a36] rounded-2xl shadow-md">
+    <div class="text-center mb-6">
+      <h2 class="text-3xl font-serif font-semibold text-[#d9cbb5] mb-2">🔒 Login</h2>
+      <p class="text-sm italic text-[#b8a58d]">Welcome back to your thoughts.</p>
     </div>
-    <div class="form-control">
-      <label class="label">
-        <span class="label-text">Password</span>
-      </label>
-      <input type="password" name="password" class="input input-bordered w-full" required>
-    </div>
-    <div class="form-control mt-6">
-      <button type="submit" class="btn btn-primary w-full">Login</button>
-    </div>
-  </form>
+
+    <form method="POST" class="space-y-6">
+      <div>
+        <label class="block mb-2 text-[#d9cbb5] font-medium">Username</label>
+        <input
+          type="text"
+          name="username"
+          class="input input-bordered w-full bg-[#1d1b18] border-[#4a443d] text-[#e9e4d8] focus:border-[#a88a67] focus:outline-none"
+          required
+        >
+      </div>
+
+      <div>
+        <label class="block mb-2 text-[#d9cbb5] font-medium">Password</label>
+        <input
+          type="password"
+          name="password"
+          class="input input-bordered w-full bg-[#1d1b18] border-[#4a443d] text-[#e9e4d8] focus:border-[#a88a67] focus:outline-none"
+          required
+        >
+      </div>
+
+      <button
+        type="submit"
+        class="btn w-full bg-[#a88a67] border-none text-white hover:bg-[#8b7153] transition-all">
+        Login
+      </button>
+    </form>
+  </div>
 </div>
 {% endblock %}

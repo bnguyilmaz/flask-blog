@@ -4,15 +4,64 @@
   <meta charset="UTF-8">
   <title>{% block title %}Bengü's Blog{% endblock %}</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
-
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+
+  <style>
+    body {
+      background-color: #1d1b18; /* koyu kahverengimsi arka plan */
+      color: #e9e4d8; /* sıcak bej metin rengi */
+      font-family: 'Inter', sans-serif;
+    }
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* Navbar - bej tonlar, mat görünüm */
+    .navbar {
+      background-color: #2a2724;
+      border-bottom: 1px solid #3e3a36;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    /* Footer - aynı tonlarda */
+    footer {
+      background-color: #2a2724;
+      color: #d9d2c1;
+      border-top: 1px solid #3e3a36;
+    }
+
+    /* Buton & link stilleri */
+    .btn-primary {
+      background-color: #a88a67;
+      border: none;
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background-color: #8b7153;
+    }
+
+    a {
+      color: #d9b98b;
+    }
+    a:hover {
+      color: #e8d2ad;
+      text-decoration: underline;
+    }
+
+    /* Alert mesajları */
+    .alert {
+      background-color: #2f2c28;
+      border: 1px solid #4a443d;
+      color: #e9e4d8;
+    }
+  </style>
 </head>
 <body>
 
-<nav class="navbar bg-base-200 px-6">
+<nav class="navbar px-6">
   <div class="flex-1">
-    <a href="{{ url_for('index') }}" class="btn btn-ghost normal-case text-xl">Bengü’s Blog</a>
+    <a href="{{ url_for('index') }}" class="text-xl font-serif font-semibold text-[#d9cbb5]">Bengü’s Blog</a>
   </div>
 
   <div class="flex-none">
@@ -23,10 +72,10 @@
       <li><a href="{{ url_for('books') }}">Books</a></li>
 
       {% if session.get('logged_in') %}
-        <li><a href="{{ url_for('logout') }}" class="text-error">Logout</a></li>
-        <li><span class="px-2 text-sm opacity-70 italic">Hi, Bengü 🌿</span></li>
+        <li><a href="{{ url_for('logout') }}" class="text-[#a88a67] hover:text-[#c9a57a]">Logout</a></li>
+        <li><span class="px-2 text-sm italic text-[#b8a58d]">Hi, Bengü 🌿</span></li>
       {% else %}
-        <li><a href="{{ url_for('login') }}" class="text-primary">Login</a></li>
+        <li><a href="{{ url_for('login') }}" class="text-[#d9b98b] hover:text-[#e8d2ad]">Login</a></li>
       {% endif %}
     </ul>
   </div>
@@ -36,7 +85,7 @@
   {% if messages %}
     <div class="max-w-2xl mx-auto mt-4">
       {% for category, message in messages %}
-        <div class="alert alert-{{ 'success' if category=='success' else 'error' if category=='error' else 'info' }} shadow-lg mb-2">
+        <div class="alert shadow-lg mb-2">
           <span>{{ message }}</span>
         </div>
       {% endfor %}
@@ -44,16 +93,15 @@
   {% endif %}
 {% endwith %}
 
+<main class="container mx-auto mt-10 px-4">
+  {% block content %}{% endblock %}
+</main>
 
-  <main class="container mx-auto mt-10">
-    {% block content %}{% endblock %}
-  </main>
-
-  <footer class="footer footer-center p-4 bg-base-200 text-base-content mt-10">
-    <aside>
-      <p>© 2025 Bengü Yılmaz</p>
-    </aside>
-  </footer>
+<footer class="footer footer-center p-4 mt-10">
+  <aside>
+    <p>© 2025 Bengü Yılmaz</p>
+  </aside>
+</footer>
 
 </body>
 </html>
