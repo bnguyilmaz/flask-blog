@@ -99,9 +99,14 @@ def login():
 
 @app.route("/logout")
 def logout():
+    # geldiğin sayfayı referer'dan al
+    previous_page = request.referrer or url_for("index")
+
     session.clear()
     flash("You have been logged out.", "info")
-    return redirect(url_for("login"))
+
+    # aynı sayfaya geri gönder
+    return redirect(previous_page)
 
 
 # -------------------------------
