@@ -10,19 +10,40 @@
 </head>
 <body>
 
-  <nav class="navbar bg-base-200 px-6">
-    <div class="flex-1">
-      <a href="{{ url_for('index') }}" class="btn btn-ghost normal-case text-xl">Bengü’s Blog</a>
+<nav class="navbar bg-base-200 px-6">
+  <div class="flex-1">
+    <a href="{{ url_for('index') }}" class="btn btn-ghost normal-case text-xl">Bengü’s Blog</a>
+  </div>
+
+  <div class="flex-none">
+    <ul class="menu menu-horizontal px-1">
+      <li><a href="{{ url_for('writings') }}">Writings</a></li>
+      <li><a href="{{ url_for('songs') }}">Music</a></li>
+      <li><a href="{{ url_for('movies') }}">Movies</a></li>
+      <li><a href="{{ url_for('books') }}">Books</a></li>
+
+      {% if session.get('logged_in') %}
+        <li><a href="{{ url_for('logout') }}" class="text-error">Logout</a></li>
+        <li><span class="px-2 text-sm opacity-70 italic">Hi, Bengü 🌿</span></li>
+      {% else %}
+        <li><a href="{{ url_for('login') }}" class="text-primary">Login</a></li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="max-w-2xl mx-auto mt-4">
+      {% for category, message in messages %}
+        <div class="alert alert-{{ 'success' if category=='success' else 'error' if category=='error' else 'info' }} shadow-lg mb-2">
+          <span>{{ message }}</span>
+        </div>
+      {% endfor %}
     </div>
-    <div class="flex-none">
-      <ul class="menu menu-horizontal px-1">
-        <li><a href="{{ url_for('writings') }}">Writings</a></li>
-        <li><a href="{{ url_for('songs') }}">Music</a></li>
-        <li><a href="{{ url_for('movies') }}">Movies</a></li>
-        <li><a href="{{ url_for('books') }}">Books</a></li>
-      </ul>
-    </div>
-  </nav>
+  {% endif %}
+{% endwith %}
+
 
   <main class="container mx-auto mt-10">
     {% block content %}{% endblock %}
